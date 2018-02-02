@@ -2,7 +2,7 @@ package a15cecal_uppgift5;
 
 public class Person implements Runnable {
 
-	private int mEnergy;
+	private int energyLevel;
 	private Bag Bag;
 	private String name;
 
@@ -15,8 +15,8 @@ public class Person implements Runnable {
 	public Person(Bag Bag, String name) {
 		this.name = name;
 		this.Bag = Bag;
-		randomEnergy();
-		System.out.println(this.name + " created with " + this.mEnergy + " energy");
+		randoenergyLevel();
+		System.out.println(this.name + " created with " + this.energyLevel + " energy");
 	}
 
 	/**
@@ -28,16 +28,16 @@ public class Person implements Runnable {
 	 */
 	@Override
 	public void run() {
-		while ((mEnergy > 0) && Bag.enoughFruit()) {
+		while ((energyLevel > 0) && Bag.enoughFruit()) {
 			loseEnergy();
-			if ((mEnergy < 20) && (mEnergy > 0)) {
-				System.out.println(this.name + " has " + this.mEnergy + " energy and is hungry...");
+			if ((energyLevel < 20) && (energyLevel > 0)) {
+				System.out.println(this.name + " has " + this.energyLevel + " energy and is hungry...");
 				Fruit fruit = takeFruitFromBag();
 				if (fruit != null)
 					eatFruit(fruit); // If the Person got a fruit, it then eats it
 			}
 		}
-		if (mEnergy <= 0)
+		if (energyLevel <= 0)
 			System.out.println(this.name + " be dead as shit... Rest in Pieces"); // If the Person's life is less or =
 																					// to zero, print this message
 		else
@@ -45,12 +45,12 @@ public class Person implements Runnable {
 																							// print this
 	}
 
-	// This randomly picks a number between 30 and 90. mEnergy is then set to said
+	// This randomly picks a number between 30 and 90. The persons energy is then set to said
 	// number
-	private void randomEnergy() {
+	private void randoenergyLevel() {
 		int min = 30;
 		int max = 90;
-		mEnergy = min + (int) (Math.random() * (max - min));
+		energyLevel = min + (int) (Math.random() * (max - min));
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class Person implements Runnable {
 	 * it sleep for 1 second before continuing
 	 */
 	private void loseEnergy() {
-		mEnergy -= 10;
+		energyLevel -= 10;
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
@@ -84,13 +84,13 @@ public class Person implements Runnable {
 	 * fruit was eaten, the energy value for the fruit, and then prints the energy level of the Person
 	 */
 	private void eatFruit(Fruit fruitToEat) {
-		mEnergy += fruitToEat.getEnergy();
+		energyLevel += fruitToEat.getEnergy();
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		System.out.println(this.name + " ate " + fruitToEat.getName() + " with " + fruitToEat.getEnergy()
-				+ " energy and now has " + this.mEnergy + " energy. Good for them");
+				+ " energy and now has " + this.energyLevel + " energy. Good for them");
 	}
 }

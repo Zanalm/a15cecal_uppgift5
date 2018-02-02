@@ -6,21 +6,21 @@ public class Bag {
 	private ArrayList<Fruit> Bag = new ArrayList<Fruit>();
 
 	/**
-	 * The constructor creates 20 fruits and adds them to the ArrayList. The size of
+	 * The constructor creates 20 fruits and adds them to the ArrayList (bag). The size of
 	 * the ArrayList is then printed
 	 */
 	public Bag() {
 		for (int i = 0; i < 20; i++)
 			addRandomFruit();
-		System.out.println("The bag created has got " + Bag.size() + " fruits.");
+		System.out.println("The magical bag created has got " + Bag.size() + " fruits.");
 	}
 
-	// Adds to the bag with a 1/5 chance of that happening
+	// Adds to the bag with a 20% chance of a fruit being added to the bag
 	private void addToBag() {
 		int addFruit = (int) (Math.random() * 5); // Randomly a number between 0 and 4 (5 numbers)
 		if (addFruit == 1)
-			addRandomFruit(); // If the randomly generated number == 1, call function addRandomFruit. (1/5
-								// chance of this happening)
+			addRandomFruit(); // If the randomly generated number == 1, call function addRandomFruit. 20%
+								// chance of this happening
 	}
 
 	/**
